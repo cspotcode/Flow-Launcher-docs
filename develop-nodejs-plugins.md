@@ -1,28 +1,28 @@
-As the language of the internet, Javascript can be used to write Flow plugins.
+JavaScript, the language of the web, can be used to write Flow plugins.
 
 ## About Flow's TypeScript/JavaScript plugins
 
-Plugins written in TypeScript/JavaScript use the [JSON-RPC](https://flow-launcher.github.io/docs/#/json-rpc) protocol to communicate with Flow via JSON structured calls.
+Plugins written in TypeScript/JavaScript use the [JSON-RPC](https://flow-launcher.github.io/docs/#/json-rpc) protocol to communicate with Flow through structured JSON calls.
 
-Although not a hard requirement, this guide will use Node.js to run the TypeScript/JavaScript. We will refer to TypeScript/JavaScript plugin as Node.js plugin from here on.
+Although not a hard requirement, this guide uses Node.js to run the TypeScript/JavaScript, and calls TypeScript/JavaScript plugins Node.js plugins from here on.
 
-When building a Node.js plugin, there are several things to be mindful of:
+When building a Node.js plugin, keep the following in mind:
 
-* The most important thing is we do not expect users to have to manually install the dependencies via npm because we aim to provide a seamless experience for them. This can be achieved by adding the following three things to your project:
-    1. Add a GitHub workflow — use a GitHub workflow that will install all your plugin's dependencies including the modules inside a folder called `node_modules`.
-    2. Publish all as a zip — zip up your project including the node_modules directory that contains the modules and publish it to GitHub Releases page.
-    3. Point your module path to the node_modules directory — reference all the modules to that directory.
+* Most importantly, users should not have to install dependencies with npm manually; the experience should be seamless. To achieve this, add the following three things to your project:
+    1. Add a GitHub workflow — a workflow that installs all your plugin's dependencies into a folder called `node_modules`.
+    2. Publish all as a zip — zip up your project, including the node_modules directory with the modules, and publish it on the GitHub Releases page.
+    3. Point your module path to the node_modules directory — load all modules from that directory.
 
-* Users can use their system-installed Node.js with Flow Launcher, but in most circumstances, they will most likely be using Flow Launcher's download of [Node.js](https://nodejs.org/dist/v16.18.0/node-v16.18.0-win-x64.zip). This download of portable Node.js version is isolated from the user's system and can be simply removed.
+* Users can use their system-installed Node.js with Flow Launcher, but most use Flow Launcher's download of [Node.js](https://nodejs.org/dist/v16.18.0/node-v16.18.0-win-x64.zip). This portable Node.js is isolated from the user's system and can simply be removed.
 
 ### Simple Example
-Have a look at this simple [example plugin](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldNodeJS), notice it has a folder called `.github/workflows` and a file called `Publish Release.yml`. This is the workflow file that GitHub Workflow uses to run the CI/CD for the project. Moving out of that folder, you can go into the [main.js](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldNodeJS/blob/main/main.js) file; this is the entry file for your plugin.
+Look at this simple [example plugin](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldNodeJS). It has a folder called `.github/workflows` with a file called `Publish Release.yml`, the workflow file GitHub uses to run the project's CI/CD. [main.js](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldNodeJS/blob/main/main.js), in the repo's root folder, is the plugin's entry file.
 
 ## Add GitHub workflow
-The workflow [file](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldNodeJS/blob/main/.github/workflows/Publish%20Release.yml) will help build and deploy your project, it does the following things:
-1. `workflow_dispatch:` gives you the option to manually run your workflow from the Actions section of your project
+The workflow [file](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldNodeJS/blob/main/.github/workflows/Publish%20Release.yml) builds and deploys your project. It does the following:
+1. `workflow_dispatch:` lets you run the workflow manually from your project's Actions section
 
-2. On pushes to main, it will kick off the workflow but ignore the push if it's only changes made to the workflow file.
+2. It runs on every push to main, except pushes that only change the workflow file.
 
 ```yml
 push:
@@ -31,7 +31,7 @@ push:
       - .github/workflows/*
 ```
 
-3. It specifies the Node.js version that will be used for building your project:
+3. It specifies the Node.js version used to build your project:
 
 ```yml
 - name: Set up Node.Js
@@ -40,7 +40,7 @@ push:
     node-version: '17.3.0'
 ```
 
-4. The project's release version is obtained from your plugin.json automatically by the CI, so when built, it will be used to tag the release:
+4. The CI reads the release version from your plugin.json and uses it to tag the release:
 
 ```yml
 - name: get version
@@ -51,7 +51,7 @@ push:
     prop_path: 'Version'
 ```
 
-5. The **Install dependencies** section is where you will do most of your CI work. It will run `npm install`, which will output all the dependencies specified in package.json into the 'node_modules' directory. The workflow will then zip them up along with your project using `zip -r Flow.Launcher.Plugin.HelloWorldNodeJS.zip . -x '*.git*'`, where you replace this `Flow.Launcher.Plugin.HelloWorldNodeJS` with the name of your plugin.
+5. The **Install dependencies** section does most of the CI work. It runs `npm install`, which installs the dependencies listed in package.json into the 'node_modules' directory. The workflow then zips them up along with your project using `zip -r Flow.Launcher.Plugin.HelloWorldNodeJS.zip . -x '*.git*'`. Replace `Flow.Launcher.Plugin.HelloWorldNodeJS` with the name of your plugin.
 
 ```yml
 - name: Install dependencies
@@ -61,7 +61,7 @@ push:
 ```
 
 ### Publish as zip
-The final step to the workflow file is this **Publish** section, which will publish the zip file you generated, upload to GitHub Releases page and tag with the version generated from the previous step from your plugin.json file. Remember again to replace `Flow.Launcher.Plugin.HelloWorldNodeJS` with the name of your plugin.
+The final **Publish** section uploads the zip file to the GitHub Releases page, tagged with the version read from your plugin.json in the earlier step. Again, replace `Flow.Launcher.Plugin.HelloWorldNodeJS` with the name of your plugin.
 
 ```yml
 - name: Publish
@@ -73,21 +73,21 @@ The final step to the workflow file is this **Publish** section, which will publ
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-Feel free to also have a read of this [blog post](https://blog.ipswitch.com/how-to-build-your-first-github-actions-workflow) which does a simple explanation of how to use GitHub Actions Workflow.
+This [blog post](https://blog.ipswitch.com/how-to-build-your-first-github-actions-workflow) gives a simple explanation of GitHub Actions workflows.
 
 ### Use node_modules directory
-Once the `node_modules` folder is included in your zip release, it can then be used without needing the user to manually npm install the plugin's dependencies. You just have to tell the plugin during runtime to find those modules in your local node_modules directory. Do this by using this exact copy of the following code block in your [main.js](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldNodeJS/blob/main/main.js):
+With the `node_modules` folder included in your zip release, users don't need to run npm install for the plugin's dependencies. At runtime, tell the plugin to find the modules in your local node_modules directory, using exactly this code block in your [main.js](https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldNodeJS/blob/main/main.js):
 ```javascript
 const open = require('./node_modules/open');
 ```
 
 ## Start with a branch
-Since we have created a CI for your plugin in the [previous step](/develop-nodejs-plugins.md?id=add-github-workflow), which includes creating a release when you push/merge to the 'main' branch, it is then necessary to create another git branch separate to your 'main' branch so you can continue to work on your plugin with git commits and pushes without creating a new release each time.
+The CI from the [previous step](/develop-nodejs-plugins.md?id=add-github-workflow) creates a release whenever you push or merge to the 'main' branch. So work on your plugin in a separate git branch, where commits and pushes don't create a new release each time.
 
-It is a good practice that you create a branch for each of the new feature/fixes you are releasing for your plugin, if you are not sure how to do so then follow this [video tutorial](https://www.gitkraken.com/learn/git/problems/create-git-branch). Once you have fully finished developing your plugin with your new branch, then you can merge it into the 'main' branch, which will consequently create a new release for your plugin with a version from your `plugin.json`.
+It's good practice to create a branch for each new feature or fix; if you're not sure how, follow this [video tutorial](https://www.gitkraken.com/learn/git/problems/create-git-branch). When you've finished, merge the branch into 'main', which creates a new release with the version from your `plugin.json`.
 
 ### main.js
-your main.js should look something like below:
+Your main.js should look something like this:
 ```js
 const open = require('./node_modules/open');
 
@@ -125,23 +125,23 @@ function do_something_for_query(url) {
 ### Query entry point 
 `if (method === "query")`
 
-This if statement captures the args passed via JSON-RPC defined as `const { method, parameters } = JSON.parse(process.argv[2])`, so if `method` is `'query'` then the console.log's code block will be run. As the `result` property is an array, you can also specify a single or multiple results.  
+This if statement checks the args passed via JSON-RPC, parsed with `const { method, parameters } = JSON.parse(process.argv[2])`. If `method` is `'query'`, the `console.log` block runs. The `result` property is an array, so it can hold one or many results.
 
 ### Assigning an action to your results  
 `JsonRPCAction`
 
-This is where you specify the method that will be executed when the user selects on the result.
-In this example, if the user selects the result, the `do_something_for_query` method will be called with the url parameter which opens the Flow Launcher GitHub repo.
+This specifies the method to run when the user selects the result.
+In this example, selecting the result calls the `do_something_for_query` method with a URL that opens the Flow Launcher GitHub repo.
 
 ### Result score
-The `score` field provides the ability to assign a weight to your score; the higher the score is, the higher the result from the plugin would show in flow's result list. The range in which you assign the score is usually between 0–100. You can keep it as 0 if your plugin generally uses an action keyword to trigger, but if you are using a global action keyword - `*` then the average weight for a plugin would be 50. Additionally, users can tweak the score via Flow's plugin setting as well. Flow's own fuzzy search scores range from 0 to 100, so plugins using the global action keyword should stay in that range to blend in with other results. Flow also raises the score of results the user has selected before, matching them by `Title` and `SubTitle`, so keep those consistent between queries.
+The `score` field assigns a weight to a result: the higher the score, the higher the result appears in Flow's result list. Scores are usually between 0 and 100. Keep it at 0 if your plugin is usually triggered by an action keyword; with a global action keyword (`*`), the average weight is 50. Users can also adjust the score in Flow's plugin settings. Flow's own fuzzy search scores range from 0 to 100, so plugins using the global action keyword should stay in that range to blend in with other results. Flow also raises the score of results the user has selected before, matching them by `Title` and `SubTitle`, so keep those consistent between queries.
 
 ### Your plugin.json
-You will also need to, if not yet already, create a plugin.json file that will instruct Flow on how to load your plugin.
+If you haven't already, create a plugin.json file, which tells Flow how to load your plugin.
 
-This file should be placed in the top level folder.
+Place it in the top-level folder.
 
-To revisit what to include in your plugin.json, visit the [plugin.json reference](/plugin.json.md)
+For what to include in your plugin.json, see the [plugin.json reference](/plugin.json.md).
 
 ## Release your plugin to Flow's Plugin Store 
 
