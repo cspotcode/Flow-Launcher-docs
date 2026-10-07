@@ -1,7 +1,7 @@
 # plugin.json
 
-`plugin.json` is the manifest file of your plugin. It is required for Flow to understand how to communicate with your plugin. 
-It must be in the plugin root directory.
+`plugin.json` is your plugin's manifest file. Flow needs it to know how to communicate with your plugin.
+It must be in the plugin's root directory.
 
 ```js
 {
@@ -19,7 +19,7 @@ It must be in the plugin root directory.
 ```
 
 ## JSON Schema 
-Additionally, you can add a property called `$schema` to enable validation and auto-completion in your IDE. This works in JetBrains IDEs (i.e., WebStorm, PhpStorm, Rider, etc.), Visual Studio, and Visual Studio Code. Add this property to the top of the JSON file:
+You can also add a `$schema` property to enable validation and auto-completion in your IDE. This works in JetBrains IDEs (i.e., WebStorm, PhpStorm, Rider, etc.), Visual Studio, and Visual Studio Code. Add this property to the top of the JSON file:
 
 ```js
 {
@@ -29,4 +29,4 @@ Additionally, you can add a property called `$schema` to enable validation and a
 }
 ```
 
-Now you should have auto-completion and file validation available for you in your IDE.
+Your IDE then offers auto-completion and validation for the file.
