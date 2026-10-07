@@ -1,15 +1,15 @@
 ﻿## Plugin Settings
 
-You might need to have some settings in your plugins that are easily changeable by users. Inputs for JSON RPC plugin settings are defined in the file called `SettingsTemplate.yaml` in the root of your plugin directory.
+Plugins often need settings that users can change easily. JSON-RPC plugins define their settings inputs in a file called `SettingsTemplate.yaml` in the root of the plugin directory.
 
 
 ### SettingsTemplate.yaml
-This is a YAML file that contains the settings page layout for your plugin. It contains an object with a single property called `body`. The `body` property contains an array of objects that define the layout of the settings page. Each object in the `body` array is a section of the settings page. Each section takes up the entire width of the page, which means you can't have one input on the left and one on the right. The layout of each section is always static: input description on the left, input on the right. Every object in the `body` array has the same structure: a `type` property that defines the type of this input (text input, textarea etc.), and an `attributes` property that contains everything else the object needs to render, such as label, description, or default value. The following is a list of the different input types that can be used in the `SettingsTemplate.yaml` file.
+This YAML file defines your plugin's settings page layout. It contains an object with a single property, `body`: an array of objects, each defining one section of the settings page. Each section spans the full width of the page, so you can't put one input on the left and another on the right. Each section's layout is fixed: the input's description on the left, the input on the right. Every object in `body` has the same structure: a `type` property for the input type (text input, textarea, etc.), and an `attributes` property with everything else needed to render it, such as label, description, or default value. The input types you can use in `SettingsTemplate.yaml` are listed below.
 
 ---
 
 #### `textBlock`
-This is a block of text with no input. Can't be edited by users, used only to display text.
+A block of text with no input, used only to display text. Users can't edit it.
 ```yaml
 type: textBlock
 attributes:
@@ -22,7 +22,7 @@ attributes:
 | `description` | The text to display. |
 
 #### `input`
-This is a simple text input.
+A simple text input.
 ```yaml
 type: input
 attributes:
@@ -41,7 +41,7 @@ attributes:
 | `defaultValue` | The default value for the input. It's the value your plugin will receive in the settings for that input until the user changes that value in settings. |
 
 #### `inputWithFileBtn` and `inputWithFolderBtn`
-This is a text input with a "Browse" button for selecting a file or a folder respectively. They look the same, the only difference is that one only allows selecting a file and the other only allows selecting a folder.
+A text input with a "Browse" button for selecting a file or a folder, respectively. The two look the same; one only allows selecting a file, the other only a folder.
 ```yaml
 type: inputWithFileBtn
 attributes:
@@ -60,7 +60,7 @@ attributes:
 | `defaultValue` | The default value for the input. It's the value your plugin will receive in the settings for that input until the user changes that value in settings. |
 
 #### `textarea`
-This is a multiline text input.
+A multiline text input.
 
 ```yaml
 type: textarea
@@ -80,7 +80,7 @@ attributes:
 | `defaultValue` | The default value for the input. It's the value your plugin will receive in the settings for that input until the user changes that value in settings. |
 
 #### `passwordBox`
-This is a password input. The user will see dots instead of the actual characters they type.
+A password input. The user sees dots instead of the characters they type.
 ```yaml
 type: passwordBox
 attributes:
@@ -99,7 +99,7 @@ attributes:
 | `defaultValue` | The default value for the input. It's the value your plugin will receive in the settings for that input until the user changes that value in settings. |
 
 #### `dropdown`
-This is a dropdown input. The user can select one of the predefined options.
+A dropdown input. The user selects one of the predefined options.
 ```yaml
 type: dropdown
 attributes:
@@ -123,7 +123,7 @@ attributes:
 | `defaultValue` | The default value for the input. It's the value your plugin will receive in the settings for that input until the user changes that value in settings. If set, this must match one of the values in the `options` property. |
 
 #### `checkbox`
-This is a simple checkbox.
+A simple checkbox.
 ```yaml
 type: checkbox
 attributes:
@@ -184,14 +184,14 @@ body:
 <settings-component-demo type="checkbox" label="Prefer shorter answers" description="If checked, the plugin will try to give answer much shorter than the usual ones."></settings-component-demo>
 
 ### JSON Schema
-Add the following line at the beginning of your `SettingsTemplate.yaml` file to enable validation and auto-completion in your IDE. Unfortunately, this feature is supported only in JetBrains IDEs (WebStorm, PhpStorm, Rider, etc.) and does not work in Visual Studio or Visual Studio Code. Please note that it must start with `#` as it must be a comment, otherwise Flow Launcher won't be able to parse the file.
+Add the following line at the beginning of your `SettingsTemplate.yaml` file to enable validation and auto-completion in your IDE. This works only in JetBrains IDEs (WebStorm, PhpStorm, Rider, etc.), not in Visual Studio or Visual Studio Code. The line must start with `#` to make it a comment; otherwise Flow Launcher can't parse the file.
 
 ```yaml
 #$schema: https://www.flowlauncher.com/schemas/settings-template.schema.json
 ```
 
 ### Visual editor for `SettingsTemplate.yaml`
-You can use a [visual editor](/json-rpc-visual-settingstemplate-editor.md) for creating the `SettingsTemplate.yaml` file. When you're done editing, click the `Generate SettingsTemplate.yaml` file and copy-paste its contents into your `SettingsTemplate.yaml` file. Optionally, you can also copy the generated typings for your settings object in your preferred programming language.
+You can create the `SettingsTemplate.yaml` file with a [visual editor](/json-rpc-visual-settingstemplate-editor.md). When you're done, click `Generate SettingsTemplate.yaml` and copy the output into your `SettingsTemplate.yaml` file. You can also copy the generated typings for your settings object in your preferred programming language.
 
 <script>
 const element = document.querySelector('#__settings-script__');
