@@ -1,6 +1,6 @@
 ### Explorer Plugin
 
-The Explorer plugin is a default plugin that installs with Flow Launcher and is used to search for files and folders on your filesystem. You can now choose which search engine will search for what type of item through Flow. You can use the built-in Windows Search Index which is default and is part of the Windows operating system or you can use a popular third-party tool called [Everything](https://www.voidtools.com/). Everything tends to be a faster search and offers more search options than Windows Index however you do need to download and install it to use it. If you don't already have Everything installed, Flow will automatically download and install it if you choose it as your search index engine. To trigger automatic install, fire a search and click the "Warning: Everything is not running" result. 
+The Explorer plugin is a default plugin that installs with Flow Launcher and searches for files and folders on your filesystem. You can choose which search engine handles each type of search: the built-in Windows Search Index (the default, part of Windows) or [Everything](https://www.voidtools.com/), a popular third-party tool. Everything is usually faster and offers more search options than Windows Index, but you need to download and install it. If you choose Everything as your search index engine and don't have it installed, Flow can install it for you: run a search and click the "Warning: Everything is not running" result.
 
 Here is how to configure this plugin:
 
@@ -8,64 +8,63 @@ Here is how to configure this plugin:
 ----
 ![General Setting tab](/assets/explorer_1.png)
 
-- *Use search result's location as the working directory of the executable* : tick this so Flow will set the working directory of any application you run through the Explorer plugin to the directory of the executable
-- *Hit enter to open folder in Default File Manager* : tick this box to have the ENTER key open the current directory in the default file manager rather than have Flow go into this directory for further browsing.
-- *File editor path* and *Folder editor path* : These two options allow you to set a program to open either files or folders, when you right mouse click / SHIFT + ENTER context menu a search result. Note these options will only appear in the context menu if you have set them here.
-For example, to set up this plugin, so you can open any directory in Visual Studio Code, first add the path to your Visual Studio Code install in the Folder editor path setting:
+- *Use search result's location as the working directory of the executable* : tick this to run applications launched through the Explorer plugin with their own directory as the working directory
+- *Hit enter to open folder in Default File Manager* : tick this to have ENTER open the directory in the default file manager, instead of browsing into it in Flow.
+- *File editor path* and *Folder editor path* : set a program for opening files or folders from a search result's context menu (right-click / SHIFT + ENTER). These options only appear in the context menu if you set them here.
+For example, to open any directory in Visual Studio Code, first add the path to your Visual Studio Code installation in the Folder editor path setting:
 
 ![Folder editor path option](/assets/explorer_1a.png)
 
-then search for a folder, and then right mouse click / SHIFT + ENTER:
+then search for a folder and right-click it (or press SHIFT + ENTER):
 
 ![Example folder search](/assets/explorer_1b.png)
 
-and then choose the *Open With Editor* option
+and choose the *Open With Editor* option
 
 ![Context menu example](/assets/explorer_1c.png)
 
-- *Shell path* : set the executable shell to be launched when the right mouse click / SHIFT + ENTER is chosen. This defaults to the Windows `cmd`
-- *Index search engine*, *Content search engine* and *Directory recursive search engine*: These three options let you choose whether Windows Index or Everything (if you have it installed) for specific tasks. The Index is for general filename search, the Content is for searching within text files and the Directory recursive is for listing subdirectories within a directory.
+- *Shell path* : the shell launched from a result's context menu (right-click / SHIFT + ENTER). Defaults to the Windows `cmd`
+- *Index search engine*, *Content search engine* and *Directory recursive search engine*: choose Windows Index or Everything (if installed) for each task. Index is for general filename search, Content is for searching within text files, and Directory recursive is for listing a directory's subdirectories.
 - *Open Windows index option*: this opens the Windows Indexing system setting, so you can see and adjust exactly what the Windows Index service is doing.
 #### Everything Setting tab
 ----
 ![Everything Setting tab](/assets/explorer_2.png)
 
-- *Search full path* : use the Everything option to search the full path and not just the filename. Equivalent to the `path:` modifier within Everything.
-- *Sort Option* : dropdown list to show how the search results are sorted.
-- *Everything Path* : If you have Everything installed, Flow Launcher will try and find the installation to use, but if you are having issues, or it is installed in a non-standard directory, you can specify it explicitly here.
+- *Search full path* : search the full path, not just the filename. Equivalent to the `path:` modifier within Everything.
+- *Sort Option* : how the search results are sorted.
+- *Everything Path* : Flow Launcher tries to find your Everything installation automatically. If that fails, or Everything is installed in a non-standard directory, specify its path here.
 
 **NOTE**
-If you let Flow download Everything for you, it will use version 1.4.1.1009. If you want to use the Everything 1.5 alpha branch you will need to do the following:
+If Flow downloads Everything for you, it installs version 1.4.1.1009. To use the Everything 1.5 alpha branch instead:
 
-1. Completely exit out of Everything (right-click the Everything system tray icon and click Exit)
-2. Open your Everything-1.5a.ini file in the same location as your Everything64.exe
+1. Fully exit Everything (right-click the Everything system tray icon and click Exit)
+2. Open the Everything-1.5a.ini file in the same folder as Everything64.exe
 3. Add the following line to the end of the file:
    ```ini
    alpha_instance=0
    ```
 4. Save changes and restart Everything.
 
-Everything will no longer use an instance name for window classes (IPC).
-Everything will continue to use the 1.5a instance name for settings, data and the Everything Service.
+Everything then stops using an instance name for window classes (IPC), but keeps using the 1.5a instance name for settings, data, and the Everything Service.
 (source - https://github.com/Flow-Launcher/Flow.Launcher/issues/1716)
 
 #### Customised Action Keywords tab
 ----
 ![Customise Action Keywords tab](/assets/explorer_3.png)
 
-- For each option here you can choose a custom keyword to trigger that specific type of search. Anything with a `*` is searched for when you type anything in Flow Launcher or if you give the Explorer plugin a global keyword. For example, the default to search within documents is set to `doc:` (this is done as searching the contents of documents is slow and so should only trigger when that is definitely what you want to do). If you don't care about exactly what type of search is executed, just use the 'Search' keyword.
+- Each option sets a custom keyword for one type of search. Searches set to `*` run whenever you type anything in Flow Launcher, or when you give the Explorer plugin a global keyword. For example, searching within documents defaults to `doc:`, because searching document contents is slow and should only run when you mean to. If you don't care which type of search runs, use the 'Search' keyword.
 
 #### Quick Access Links tab
 ----
 ![Quick Access Links tab](/assets/explorer_4.png)
 
-- Here you can add directories that you often work with, and would like to be returned as soon as you start typing their source location. Directories can also be added and removed from this list with the right mouse click / SHIFT + ENTER context menu from any search result that is a directory.
+- Add directories you work with often, so they're returned as soon as you start typing their location. You can also add or remove directories through the context menu (right-click / SHIFT + ENTER) of any directory search result.
 #### Index Search Excluded Paths tab
 ----
 ![Index Search Excluded Paths tab](/assets/explorer_5.png)
 
-- Adding a directory here will exclude it from the Flow Launcher search, over-riding any settings you may have in Windows Indexing or Everything.
+- Adding a directory here excludes it from Flow Launcher's search, overriding any Windows Indexing or Everything settings.
 
 #### Using Everything
 
-If you do choose to use Everything to search, [these Everything commands](https://www.voidtools.com/support/everything/searching/) may be useful to reference.
+When searching with Everything, [these Everything commands](https://www.voidtools.com/support/everything/searching/) are a useful reference.
