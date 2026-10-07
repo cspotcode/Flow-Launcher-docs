@@ -20,7 +20,7 @@ When a user triggers your plugin, Flow:
 
 Your process runs when called and then exits. It must write its response to stdout.
 
-> **Important:** Only write JSON-RPC responses to stdout. Any debug output must go to a log file. Flow treats any output on **stderr** as an error and will not parse the response.
+> **Important:** Write only JSON-RPC responses to stdout, and send debug output to a log file. Flow treats any output on **stderr** as an error and won't parse the response.
 
 ---
 
@@ -47,7 +47,7 @@ Set `"Language": "executable"` and point `"ExecuteFileName"` at your binary:
 
 ## JSON-RPC protocol
 
-Flow passes the request as JSON in the first command-line argument. It has a `method` and a `parameters` array.
+Flow passes the request as JSON in the first command-line argument. The request has a `method` and a `parameters` array.
 
 ### Methods Flow will call
 
@@ -119,7 +119,7 @@ These are handled by Flow directly — you don't need to implement them yourself
 | `Flow.Launcher.CopyToClipboard` | `[text, false, true]` | Copies text to the clipboard |
 | `Flow.Launcher.ShellRun` | `[command, "cmd.exe"]` | Runs a shell command |
 
-For custom actions (ones you implement yourself), use any method name not prefixed with `Flow.Launcher.`. Flow will send it back to your process as a new method call.
+For custom actions (ones you implement yourself), use any method name not prefixed with `Flow.Launcher.`. Flow sends it back to your process as a new method call.
 
 ---
 
@@ -303,7 +303,7 @@ Copy your plugin folder to:
 %APPDATA%\FlowLauncher\Plugins\MyPlugin\
 ```
 
-Then restart Flow or press `F5` / type `reload plugin data` to load it.
+Then restart Flow, or press `F5` / type `reload plugin data`, to load it.
 
 ---
 
@@ -327,4 +327,4 @@ You can also view Flow's own logs by typing `open log location` in Flow.
 See the [plugin manifest repo](https://github.com/Flow-Launcher/Flow.Launcher.PluginsManifest) for instructions on releasing to the Plugin Store, including the required GitHub Actions workflow for automated builds.
 
 **SECURITY NOTE**
-New binary plugin submissions will only be accepted to the Plugin Store after the source code and GitHub CI action have been reviewed and verified. Users will be warned in other parts of Flow documentation that binary plugins represent the greatest security risk as they are one step removed from direct source code.
+New binary plugin submissions are only accepted to the Plugin Store after their source code and GitHub CI action have been reviewed and verified. Other parts of the Flow documentation will warn users that binary plugins are the greatest security risk, because they are one step removed from the source code.
