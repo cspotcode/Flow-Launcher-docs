@@ -2,13 +2,13 @@
 
 **New to Flow Launcher?** This page gets you productive in 5 minutes.
 
-Flow Launcher is a keyboard-driven launcher for Windows. Press a hotkey, type something, press Enter. That's the core loop — but there's a lot of power underneath once you know where to look.
+Flow Launcher is a keyboard-driven launcher for Windows. Press a hotkey, type something, press Enter. That's the core loop, and there's much more underneath once you know where to look.
 
 ## Step 1 — Open Flow
 
-By default, Flow is triggered with `Alt + Space`. You can change this under **Settings → Hotkeys → Open Flow Launcher**.
+By default, `Alt + Space` opens Flow. You can change this under **Settings → Hotkeys → Open Flow Launcher**.
 
-> **Tip:** If Flow doesn't open, check your system tray — look for the Flow icon. Right-click it to access Settings.
+> **Tip:** If Flow doesn't open, look for its icon in the system tray. Right-click the icon to open Settings.
 
 ## Step 2 — Search for anything
 
@@ -29,13 +29,13 @@ For example:
 - `> <command>` → run a shell command
 - `doc: <text>` → search inside file contents
 
-To see all currently active keywords, type **`?`** in the search bar. Refine by typing the first letter or two of the keyword you're looking for.
+Type **`?`** in the search bar to see all active keywords. Type the first letter or two of a keyword to narrow the list.
 
 > **Global vs. dedicated keywords:** Plugins set to the `*` keyword respond to every query. Plugins with a dedicated keyword (like `wiki`) only respond when you type that prefix. You can customise keywords per-plugin in **Settings → Plugins**.
 
 ## Step 4 — Use the context menu
 
-Every result has a **context menu** with additional actions specific to that plugin.
+Every result has a **context menu** with additional actions from the plugin that provided it.
 
 To open it:
 - Press **→** (right arrow) on a highlighted result, or

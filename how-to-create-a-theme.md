@@ -1,22 +1,22 @@
 ## Overview
 
-If you make a theme for the first time, refer to the existing theme. Copy the **sublime.xaml** (This is one of the basic theme files.) in the theme folder of Flow and make it a new file.  Or you can download [Sublime.xaml](https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/Flow.Launcher/Themes/Sublime.xaml).
+If you're making a theme for the first time, start from an existing one: copy **sublime.xaml** (one of the basic theme files) in Flow's theme folder to a new file, or download [Sublime.xaml](https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/Flow.Launcher/Themes/Sublime.xaml).
 
 ## ⛔ Caution ⛔
 
-Place the theme you created in the Theme folder inside the UserData directory, for roaming this is located at `%APPDATA%\FlowLauncher\Themes\` (AppData Roaming path) and for portable it is by default `%localappdata%\FlowLauncher\app-<VersionOfYourFlowLauncher>\UserData\Themes\` (AppData Local path). Flow will read from the UserData directory for custom themes and its own app directory for default themes. Make sure you do not place in the location outside UserData because it will be erased along with the default theme files after an update.
+Place your theme in the Themes folder inside the UserData directory. For a roaming install this is `%APPDATA%\FlowLauncher\Themes\` (AppData Roaming path); for a portable install it is `%localappdata%\FlowLauncher\app-<VersionOfYourFlowLauncher>\UserData\Themes\` by default (AppData Local path). Flow reads custom themes from the UserData directory and default themes from its own app directory. Don't place your theme outside UserData: it would be erased along with the default theme files on the next update.
 
 ## Theme elements
 
-The theme file allows you to set the following parts. Each style has a key, and there are items that can be modified. If theme has a key not described in this document, we recommend you not to modify it separately.
+The theme file sets the following parts. Each style has a key and properties you can modify. If a theme has a key not described here, we recommend not modifying it.
 
-(*There is a possibility of changing/deleting this part depending on the version.*)
+(*This section may change or be removed in future versions.*)
 
 ![Flow Launcher screenshot](https://cdn.jsdelivr.net/gh/Flow-Launcher/docs@main/assets/themelayout.png)
 
 ### WindowBorderStyle
 
-In this item, you can set the color, border size, border color, and corner radius of the basic window.
+Sets the color, border size, border color, and corner radius of the main window.
 
 ```xml
 <Style x:Key="WindowBorderStyle" BasedOn="{StaticResource BaseWindowBorderStyle}" TargetType="{x:Type Border}">
@@ -27,13 +27,13 @@ In this item, you can set the color, border size, border color, and corner radiu
  </Style>
 ```
 
-Window border thickness is recommended from 1 or 2. Recommended corner radius is 0, 5 or less.
+Recommended: a border thickness of 1 or 2, and a corner radius of 5 or less (0 is fine).
 
 <br>
 
 ### QueryBoxStyle
 
-This is the style of the basic search window. You can set the font size, color of cursor, font color, input window height. If the font size is reduced, the height of the window is also reduced, so the height must be specified.
+The style of the search window's input: font size, cursor color, font color, and input height. Reducing the font size also reduces the window height, so specify the height.
 
 ```xml
 <Style x:Key="QueryBoxStyle" BasedOn="{StaticResource BaseQueryBoxStyle}" TargetType="{x:Type TextBox}">
@@ -49,7 +49,7 @@ This is the style of the basic search window. You can set the font size, color o
 
 ### QuerySuggestionBoxStyle
 
-This is the style of the recommended search word that appears after the search word. The font size & Height should be the same as the QueryBoxStyle, and a more translucent color is recommended.
+The style of the suggested search word that appears after the search text. Use the same font size and height as QueryBoxStyle, and preferably a more translucent color.
 
 ```xml
 <Style x:Key="QuerySuggestionBoxStyle" BasedOn="{StaticResource BaseQuerySuggestionBoxStyle}" TargetType="{x:Type TextBox}">
@@ -64,7 +64,7 @@ This is the style of the recommended search word that appears after the search w
 
 ### PendingLineStyle
 
-It is possible to set the color of the loading bar that is sometimes displayed.
+Sets the color of the loading bar that sometimes appears.
 
 ```xml
 <Style x:Key="PendingLineStyle" BasedOn="{StaticResource BasePendingLineStyle}" TargetType="{x:Type Line}">
@@ -76,7 +76,7 @@ It is possible to set the color of the loading bar that is sometimes displayed.
 
 ### SearchIconStyle
 
-This is the style of the magnifying glass icon displayed on the right side of the search window. Color & Size can be changed or hidden. (The picture change will be updated later.)
+The style of the magnifying glass icon on the right side of the search window. Its color and size can be changed, or it can be hidden. (The picture will be updated later.)
 
 ```xml
 <Style x:Key="SearchIconStyle" TargetType="{x:Type Path}" BasedOn="{StaticResource BaseSearchIconStyle}">
@@ -86,7 +86,7 @@ This is the style of the magnifying glass icon displayed on the right side of th
 </Style>
 ```
 
-If you want to hide it, you can add the following code.
+To hide it, add:
 
 ```xml
 <Setter Property="Visibility" Value="Collapsed" />
@@ -96,7 +96,7 @@ If you want to hide it, you can add the following code.
 
 ### ItemTitleStyle
 
-This is the title part of the search result. The font size and color can be adjusted.
+The title of a search result. Sets its font size and color.
 
 ```xml
 <Style x:Key="ItemTitleStyle"  BasedOn="{StaticResource BaseItemTitleStyle}" TargetType="{x:Type TextBlock}">
@@ -109,7 +109,7 @@ This is the title part of the search result. The font size and color can be adju
 
 ### ItemTitleSelectedStyle
 
-You can specify a color that changes when the item is focused. The font size should be the same as ItemTitleStyle.
+The color used when the item is focused. Keep the font size the same as ItemTitleStyle.
 
 ```xml
 <Style x:Key="ItemTitleSelectedStyle" BasedOn="{StaticResource BaseItemTitleSelectedStyle}"  TargetType="{x:Type TextBlock}" >
@@ -121,7 +121,7 @@ You can specify a color that changes when the item is focused. The font size sho
 
 ### ItemSubTitleStyle
 
-This is the filepath part of the search result. The font size and color can be adjusted.
+The file path of a search result. Sets its font size and color.
 
 ```xml
 <Style x:Key="ItemSubTitleStyle" BasedOn="{StaticResource BaseItemSubTitleStyle}" TargetType="{x:Type TextBlock}" >
@@ -134,7 +134,7 @@ This is the filepath part of the search result. The font size and color can be a
 
 ### ItemSubTitleSelectedStyle
 
-You can specify a color that changes when the item is focused. The font size should be the same as ItemSubTitleStyle.
+The color used when the item is focused. Keep the font size the same as ItemSubTitleStyle.
 
 ```xml
 <Style x:Key="ItemSubTitleSelectedStyle" BasedOn="{StaticResource BaseItemSubTitleSelectedStyle}" TargetType="{x:Type TextBlock}" >
@@ -160,7 +160,7 @@ Specifies the color and size of the Hotkey font.
 
 ### ItemHotkeySelectedStyle
 
-You can specify a color that changes when the item is focused. The font size should be the same as `ItemHotkeyStyle`.
+The color used when the item is focused. Keep the font size the same as `ItemHotkeyStyle`.
 
 ```xml
 <Style x:Key="ItemHotkeySelectedStyle" TargetType="{x:Type TextBlock}">
@@ -173,7 +173,7 @@ You can specify a color that changes when the item is focused. The font size sho
 
 ### ItemSelectedBackgroundColor
 
-This is the background color emphasized when the item is selected.
+The background color of the selected item.
 
 ```xml
 <SolidColorBrush x:Key="ItemSelectedBackgroundColor">#3c454e</SolidColorBrush>
@@ -183,7 +183,7 @@ This is the background color emphasized when the item is selected.
 
 ### HighlightStyle
 
-It emphasizes the part where the search word matches the result. Color and Font Weight can be set.
+Highlights the part of a result that matches the search text. Sets the color and font weight.
 
 ```xml
 <Style x:Key="HighlightStyle">
@@ -219,7 +219,7 @@ Specifies the color and size of the scroll bar.
 
 ### SeparatorStyle
 
-Set the size, height, color, and margin of the horizontal line. If you don't think you need it, you can get rid of it.
+Sets the size, height, color, and margin of the horizontal line. You can hide it if you don't need it.
 
 ```xml
 <Style x:Key="SeparatorStyle" BasedOn="{StaticResource BaseSeparatorStyle}" TargetType="{x:Type Rectangle}">
@@ -229,7 +229,7 @@ Set the size, height, color, and margin of the horizontal line. If you don't thi
 </Style>
 ```    
 
-If you want to hide it, you can add the following code.
+To hide it, add:
 
 ```xml
 <Setter Property="Visibility" Value="Collapsed" />
@@ -249,7 +249,7 @@ Specifies the color of the glyph icon.
 
 ----
 ### Theme Info
-You can add the following theme information at the top of the file: the theme name, whether blur is supported, and whether dark mode is supported. This value is displayed as an icon in Flow's theme list.
+You can add the following theme information at the top of the file: the theme name, whether blur is supported, and whether dark mode is supported. Flow's theme list shows these as icons.
 ```xml
 <!--
     Name: Windows 11
@@ -259,7 +259,7 @@ You can add the following theme information at the top of the file: the theme na
 ```
 
 ## How to Make Blur theme
-The following values must be added within the theme file.
+Add the following values to the theme file.
 
 ```xml
     <system:Boolean x:Key="ThemeBlurEnabled">True</system:Boolean>
@@ -272,11 +272,11 @@ Set `ThemeBlurEnabled` to `True` for themes that support blur, and False otherwi
 `Auto` automatically switches between `Light` and `Dark` based on Flow's ColorScheme setting.
 `LightBG` is the window color used in `Light` mode, and `DarkBG` is the window color used in `Dark` mode.
 
-When the blur effect is enabled, users cannot disable window shadows, and the window corner radius is determined by the system. In other words, any values specified by the theme designer for these properties will be ignored.
+When the blur effect is enabled, users can't disable window shadows, and the system determines the window corner radius. Any values the theme sets for these properties are ignored.
 
 ### Blur Effects
 
-Windows 11 users can choose from four types of blur effects, each with the following characteristics:
+Windows 11 users can choose from four blur effects:
 
 
 #### **None**
@@ -290,10 +290,10 @@ No blur effect is applied. The window background color is determined in the foll
 #### **Acrylic**
 
 1. The system-defined Light/Dark background is applied first.  
-2. Then, the colors defined in `LightBG` and `DarkBG` are drawn on top. (Like Tint)
+2. Then, the colors defined in `LightBG` and `DarkBG` are drawn on top, like a tint.
 3. The `LightBG` and `DarkBG` values should include some level of alpha (transparency), and the colors should not differ too drastically from the system-applied base color.
 
-In other words, you should avoid specifying background colors that differ too much in tone from the default window colors drawn by Windows.
+In other words, avoid background colors that differ too much in tone from the default window colors Windows draws.
 
 #### **Mica / Mica Alt**
 
@@ -303,15 +303,15 @@ In other words, you should avoid specifying background colors that differ too mu
 
 #### 💡 Design Recommendation
 
-Since the window background can change significantly depending on the user's blur settings,  it is **recommended to design Blur themes by adjusting text and element opacity based on black or white colors** to ensure good contrast and readability.
+Because the window background can change significantly with the user's blur settings, **design Blur themes by adjusting the opacity of black or white text and elements**, to ensure good contrast and readability.
 <br>
 
 ----
 
 ## How to Make Auto Dark Mode theme
-- By default, if the SystemBG property is set to Auto and both LightBG and DarkBG color values are specified, the theme will function automatically as intended.
-- The colors of control elements for Light and Dark modes should be based on Flow's resource definitions to ensure they switch automatically with the theme. (Currently, these cannot be defined separately within the theme itself.)
-Refer to the built-in Windows11 theme as a reference, and check the provided link
+- If the SystemBG property is set to Auto and both LightBG and DarkBG are specified, the theme switches automatically.
+- Base the Light and Dark mode colors of control elements on Flow's resource definitions, so they switch automatically with the theme. (These can't currently be defined within the theme itself.)
+Use the built-in Windows11 theme as a reference, and see these links:
 
 - https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/Flow.Launcher/Themes/Win11Light.xaml
 - https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/Flow.Launcher/Resources/Light.xaml
@@ -319,6 +319,6 @@ Refer to the built-in Windows11 theme as a reference, and check the provided lin
 ----
 
 ## Let's share it
-Once you have crafted your perfect theme, why not share it with the community:
+Once you've crafted your perfect theme, share it with the community:
 
 [Theme Gallery](https://github.com/Flow-Launcher/Flow.Launcher/discussions/1438)

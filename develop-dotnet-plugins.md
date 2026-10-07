@@ -1,72 +1,72 @@
-Flow is written in C#, so plugins written in .NET platform can directly communicate with Flow without extra protocols.
+Flow is written in C#, so .NET plugins communicate with Flow directly, without an extra protocol.
 
 ## Initialisation
 
-For C# Plugins, We recommend you use the [dotnet template](https://github.com/Flow-Launcher/dotnet-template) to generate a plugin template.
+For C# plugins, we recommend generating your plugin from the [dotnet template](https://github.com/Flow-Launcher/dotnet-template).
 
-To be recognized as a Flow .NET plugin, the directory needs to have at least two files
+A Flow .NET plugin directory needs at least two files:
 1. [`plugin.json`](/plugin.json.md)
-2. A .NET Assembly that implements **[IPlugin](/API-Reference/Flow.Launcher.Plugin/IPlugin.md)** or **[IAsyncPlugin](/API-Reference/Flow.Launcher.Plugin/IAsyncPlugin.md)** (remember to reference [Flow.Launcher.Plugin](https://www.nuget.org/packages/Flow.Launcher.Plugin/) by Nuget). The plugin template will add the reference and create  a `Main.cs` that implements `IPlugin`.
+2. A .NET Assembly that implements **[IPlugin](/API-Reference/Flow.Launcher.Plugin/IPlugin.md)** or **[IAsyncPlugin](/API-Reference/Flow.Launcher.Plugin/IAsyncPlugin.md)** (reference the [Flow.Launcher.Plugin](https://www.nuget.org/packages/Flow.Launcher.Plugin/) NuGet package). The plugin template adds the reference and creates a `Main.cs` that implements `IPlugin`.
 
-Find the [Flow Launcher Plugin API Reference](/API-Reference/Flow.Launcher.Plugin.md)
+See the [Flow Launcher Plugin API Reference](/API-Reference/Flow.Launcher.Plugin.md).
 
 
 See the [Flow Launcher C# plugin samples](https://github.com/Flow-Launcher/plugin-samples).
 
 ## IPlugin/IAsyncPlugin
 
-The `Main` class that implements **[IPlugin](/API-Reference/Flow.Launcher.Plugin/IPlugin.md)** or **[IAsyncPlugin](/API-Reference/Flow.Launcher.Plugin/IAsyncPlugin.md)** will handle the query search with Flow.
+The `Main` class that implements **[IPlugin](/API-Reference/Flow.Launcher.Plugin/IPlugin.md)** or **[IAsyncPlugin](/API-Reference/Flow.Launcher.Plugin/IAsyncPlugin.md)** handles search queries from Flow.
 
-**[IPlugin](/API-Reference/Flow.Launcher.Plugin/IPlugin.md)** interface contains two required methods:
+The **[IPlugin](/API-Reference/Flow.Launcher.Plugin/IPlugin.md)** interface has two required methods:
 1. `void Init(PluginInitContext context)`
-    - [PluginInitContext](/API-Reference/Flow.Launcher.Plugin/PluginInitContext.md) exposes some API from Flow and a metadata object for your plugin. 
-    - It will be invoked before the invocation of `Query`, so you can do some preparation here. 
-    - We recommend you do expensive operations in this method instead of Object Constructor because this method will be executed in parallel with other plugins.
+    - [PluginInitContext](/API-Reference/Flow.Launcher.Plugin/PluginInitContext.md) exposes part of Flow's API and a metadata object for your plugin.
+    - It runs before `Query`, so do any preparation here.
+    - Do expensive work here rather than in the constructor, because this method runs in parallel with other plugins.
 2. `List<Result> Query(Query query)`
-    - `Query` will be invoked when user activates this plugin with specific ActionKeyword.
-    - A `List` of [Result](/API-Reference/Flow.Launcher.Plugin/Result.md) object should be returned.
+    - `Query` is invoked when the user activates this plugin with its action keyword.
+    - It returns a `List` of [Result](/API-Reference/Flow.Launcher.Plugin/Result.md) objects.
  
  **[IAsyncPlugin](/API-Reference/Flow.Launcher.Plugin/IAsyncPlugin.md)** is the async version of **[IPlugin](/API-Reference/Flow.Launcher.Plugin/IPlugin.md)**
- - Instead of implementing `Init` and `Query`, you will need to implement `InitAsync` and `QueryAsync`, which use `Task`,`Task<List<Result>>` as return value to allow using `async/await` strategy
- - `QueryAsync` provides a `CancellationToken token` to allow you to check whether user has typed a new query.
+ - Instead of `Init` and `Query`, implement `InitAsync` and `QueryAsync`, which return `Task` and `Task<List<Result>>` so you can use `async/await`
+ - `QueryAsync` receives a `CancellationToken token` that lets you check whether the user has typed a new query.
 
 
 ## Additional interfaces
 
-Besides the basic implementation of **IPlugin/IAsyncPlugin**, plugins can also implement a series of interfaces that belong to **IFeatures** to control more communication with Flow. 
+Besides **IPlugin/IAsyncPlugin**, plugins can implement a series of interfaces that belong to **IFeatures**, for more interaction with Flow.
 
-**Remarks**: You should implement these interfaces in the same class that implements **IPlugin/IAsyncPlugin**.
+**Remarks**: Implement these interfaces in the same class that implements **IPlugin/IAsyncPlugin**.
 
 ### [IContextMenu](/API-Reference/Flow.Launcher.Plugin/IContextMenu.md)
 
-`LoadContextMenus` will be invoked when users expand the context menu of a specific Result. 
-The return value of `LoadContextMenus` is similar to Results from `Query/QueryAsync`.
+`LoadContextMenus` is invoked when the user opens a result's context menu.
+It returns results, like `Query/QueryAsync`.
 
 ### [IReloadable](/API-Reference/Flow.Launcher.Plugin/IReloadable.md)/[IAsyncReloadable](/API-Reference/Flow.Launcher.Plugin/IAsyncReloadable.md)
 
-`ReloadData/ReloadDataAsync` will be invoked when users click the `Reload Plugin Data` command from _sys_ plugin. Generally, it is used to reload some cache (such as the programs information cached in _Program_ plugin).
+`ReloadData/ReloadDataAsync` is invoked when the user runs the `Reload Plugin Data` command from the _sys_ plugin. It's typically used to reload caches (such as the program information cached by the _Program_ plugin).
 
 ### [IPluginI18n](/API-Reference/Flow.Launcher.Plugin/IPluginI18n.md)
 
-**IPluginI18n** means the plugin has been internationalized. Therefore, Flow will load the additional language resources from `/Languages` when loading the plugin.
-By implementing this interface with additional language files, Flow will be able to load plugin-specific localized language resources. You will be able to get the translated text with `IPublicAPI.GetTranslation(string key)`.
+**IPluginI18n** marks the plugin as internationalized, so Flow loads its language resources from `/Languages` when loading the plugin.
+With this interface and the language files in place, get translated text with `IPublicAPI.GetTranslation(string key)`.
 
 #### Language Resource
 
-A Language Resource file will have name of the specific Language Code with suffix `.xaml`. The information of the Language Code can be found here [AvailableLanguages.cs](https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/Flow.Launcher.Core/Resource/AvailableLanguages.cs).
-The Language Resource file will need to be a list of **key/value** pair. Follow the examples found in [en.xaml](https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/Flow.Launcher/Languages/en.xaml).
+A Language Resource file is named after its Language Code, with the suffix `.xaml`. The Language Codes are listed in [AvailableLanguages.cs](https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/Flow.Launcher.Core/Resource/AvailableLanguages.cs).
+The Language Resource file is a list of **key/value** pairs. Follow the examples in [en.xaml](https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/Flow.Launcher/Languages/en.xaml).
 
 #### Remark
 
-Plugins are required to implement **IPluginI18n** to let Flow load Language resources.
+Plugins must implement **IPluginI18n** for Flow to load their Language resources.
  
 ### [IResultUpdated](/API-Reference/Flow.Launcher.Plugin/IResultUpdated.md)
 
 
-Implementing **IResultUpdated** provides a way to return part of the query results early. This is generally useful for plugins with long-running queries.
+**IResultUpdated** lets a plugin return part of its query results early, which is useful for long-running queries.
 
-To early return a result to Flow, you will need to invoke `ResultsUpdated` event with an `ResultUpdatedEventArgs`, which includes the current `Query` object and the List of `Result` objects similar to the return value in `Query(Async)`.
+To return results early, invoke the `ResultsUpdated` event with a `ResultUpdatedEventArgs`, which includes the current `Query` object and the List of `Result` objects similar to the return value in `Query(Async)`.
 
 ### [IDisposable](https://docs.microsoft.com/en-us/dotnet/api/system.idisposable) _Flow 1.8.0 or higher_
 
-Implementing **IDisposable** to dispose unmanaged resource in the plugin. `Dispose()` will be called when Flow exit.
+Implement **IDisposable** to dispose of unmanaged resources in the plugin. Flow calls `Dispose()` when it exits.

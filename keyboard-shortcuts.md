@@ -19,7 +19,7 @@ A complete reference for keyboard shortcuts in Flow Launcher.
 |---|---|
 | `↑` / `↓`, `Tab`, `Shift + Tab` | Move between results |
 | `Enter` | Run the selected result's default action |
-| `Ctrl + Enter` | Open the containing folder for explorer results |
+| `Ctrl + Enter` | Open the containing folder of an Explorer result |
 | `Ctrl + Shift + Enter` | Run the selected result as Administrator, or open a folder result in the file manager |
 | `Alt + 1` … `Alt + 9`, `Alt + 0` | Run the 1st … 9th, 10th result |
 | `Alt + Home` / `Alt + End` | Select the first / last result |
@@ -55,7 +55,7 @@ A complete reference for keyboard shortcuts in Flow Launcher.
 
 ## Plugin Manager (in the search bar)
 
-These are typed commands rather than keyboard shortcuts, but included here for discoverability:
+These are commands you type, not keyboard shortcuts, listed here for discoverability:
 
 | Command | Action |
 |---|---|
@@ -67,5 +67,5 @@ These are typed commands rather than keyboard shortcuts, but included here for d
 
 ## Tips
 
-- Typing **`?`** shows all currently active action keywords. Narrow them by typing the first character or two of the keyword you're looking for.
+- Type **`?`** to see all active action keywords. Type the first character or two of a keyword to narrow the list.
 - Many shortcuts can be customised individually in **Settings → Hotkeys**, not only the global activation hotkey.
