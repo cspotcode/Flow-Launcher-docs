@@ -18,13 +18,13 @@ Plugins can also:
 
 ## Before starting work on a Plugin
 
-Before you start, check the Plugin Store for similar plugins. If one exists, contact its author about extending it together—this gets features to users faster and maintains plugin quality. Only create a new plugin if the author doesn't respond, declines, or if your idea requires vastly different features, performance, or architecture.
+Before you start, check the Plugin Store for similar plugins. If one exists, contact its author about extending it together—this gets features to users faster and maintains plugin quality. Only create a new plugin if the author doesn't respond or declines, or if your idea needs very different features, performance, or architecture.
 
 ---
 
 ## Plugin Store policy
 
-Plugins that facilitate or contain any of the following will not be allowed:
+Plugins that contain or facilitate any of the following are not allowed:
 
 - Malicious code
 - Piracy
@@ -58,7 +58,7 @@ Flow Launcher renders results
 User selects a result → Flow calls your action
 ```
 
-For .NET plugins this is a direct in-process method call. For all other languages, this communication happens over **JSON-RPC** — a lightweight protocol where Flow sends JSON to your process, and your process writes JSON to stdout.
+For .NET plugins this is a direct in-process method call. For all other languages, the communication uses **JSON-RPC** — a lightweight protocol where Flow sends JSON to your process, and your process writes JSON to stdout.
 
 ---
 
@@ -105,13 +105,13 @@ See the [plugin.json reference](/plugin.json.md) for all available fields.
 
 ## What a result looks like
 
-All plugins return a list of Result objects after a query.  
+After a query, every plugin returns a list of Result objects.
 
-Each Result represents one row in Flow Launcher and controls:  
+Each Result is one row in Flow Launcher's result list and controls:
 - How that row looks  
 - How the user can interact with it  
 
-It has many properties, but these are the core ones:  
+Results have many properties; these are the core ones:
 
 ```json
 {
@@ -135,14 +135,14 @@ It has many properties, but these are the core ones:
 
 ## Plugin folder structure
 
-Plugin structure varies by language, so the best way to get started is to use a template or sample:
+Plugin structure varies by language, so start from a template or sample:
 
 - **.NET**: Use `dotnet new flow-plugin` to scaffold from a template
 - **Other languages**: Check the example plugins in each language's development guide below
 
-Every plugin needs a **plugin.json** file. This file tells Flow how to load your plugin; details can be found above.
+Every plugin needs a **plugin.json** file, which tells Flow how to load the plugin (see above).
 
-Beyond these essentials, you have flexibility in how you organize your code. See the language-specific development guides for examples.
+Beyond that, you can organise your code however you like. See the language-specific development guides for examples.
 
 ---
 
@@ -167,7 +167,7 @@ Pick your language and follow the step-by-step guide:
 
 ## Releasing your Plugin to the Plugin Store
 
-To release your plugin, follow the instructions in Flow's [plugin repo](https://github.com/Flow-Launcher/Flow.Launcher.PluginsManifest). Note that each new submission needs to be reviewed and approved before it is available to all Flow users in the Plugin Store. This is done on a volunteer basis by the Flow Launcher Team so may take some time after initial submission. If it has taken a week or two, you can jump into the Flow Discord (https://discord.gg/n3vANeaxty) and let the team know the submission has been there for a while and we are sure a friendly team member will escalate the review. We appreciate the effort Plugin authors put in to extending the functionality of Flow Launcher and we will do our best to ensure Plugin submissions are reviewed in a timely manner.
+To release your plugin, follow the instructions in Flow's [plugin repo](https://github.com/Flow-Launcher/Flow.Launcher.PluginsManifest). Each new submission must be reviewed and approved before it appears in the Plugin Store. Reviews are done by Flow Launcher Team volunteers, so they may take some time. If your submission has waited a week or two, let the team know in the Flow Discord (https://discord.gg/n3vANeaxty) and a team member will escalate the review. We appreciate the effort plugin authors put into extending Flow Launcher, and we do our best to review submissions promptly.
 
 ---
 
