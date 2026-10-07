@@ -22,13 +22,13 @@ Answers to common questions for both **Flow users** and **plugin developers**.
 
 ### Flow is slow to open or results are slow to appear
 
-- Some plugins do network calls or heavy file I/O on every query. Identify which ones by temporarily disabling plugins one at a time
+- Some plugins make network calls or do heavy file I/O on every query. To find them, temporarily disable plugins one at a time
 - If the Explorer plugin uses **Everything** as its search engine, check that Everything is running. Look for a warning result in Flow when you search
 - Reduce the number of global (`*`) keyword plugins — they all run on every query
 
 ### My newly installed app doesn't appear in results
 
-Flow's app index refreshes automatically, but you can force it by:
+Flow's app index refreshes automatically. To force a refresh:
 - Pressing `F5` in the query window, or
 - Typing `reload plugin data`
 
@@ -49,7 +49,7 @@ If you've moved between monitors with different resolutions, the window position
 
 This is a SmartScreen warning, not an indication that Flow is harmful. It appears because Flow hasn't accumulated enough download volume for Microsoft to automatically trust it. As long as you downloaded from [flowlauncher.com](https://flowlauncher.com) or the [official GitHub repo](https://github.com/Flow-Launcher/Flow.Launcher), it is safe. Click "More info" → "Run anyway".
 
-Similarly, antivirus false positives can occur. If you've confirmed you downloaded from an official source, submit a false-positive report to your AV vendor.
+Antivirus software can also report false positives. Once you've confirmed you downloaded from an official source, submit a false-positive report to your antivirus vendor.
 
 ---
 
@@ -96,11 +96,11 @@ It depends on your plugin type:
 
 ### How do I test my plugin without reinstalling it each time?
 
-Develop directly inside `%APPDATA%\FlowLauncher\Plugins\YourPlugin\` and use `reload plugin data` (or `F5`) to reload without restarting Flow. For .NET plugins you'll need to restart Flow to pick up recompiled DLLs.
+Develop directly inside `%APPDATA%\FlowLauncher\Plugins\YourPlugin\` and use `reload plugin data` (or `F5`) to reload without restarting Flow. .NET plugins need a Flow restart to pick up recompiled DLLs.
 
 ### How do I view logs from my plugin?
 
-Type `open log location` in Flow to open the logs folder. Each plugin gets its own log entries. You can also write your own log file from within your plugin code.
+Type `open log location` in Flow to open the logs folder. Each plugin gets its own log entries. Your plugin can also write its own log file.
 
 ### My plugin works locally but fails after publishing
 
