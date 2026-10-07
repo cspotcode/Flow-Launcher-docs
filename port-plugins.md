@@ -3,21 +3,21 @@
 ### Notes
 
 - When porting, please keep the author's commit history
-- Flow Launcher targets minimum .NET 9, so older plugins should be upgraded to keep the continuity of their future developments
-- All dll libraries used by the plugin should be outputted and included in the final build, to do this, set the attribute CopyLocalLockFileAssemblies in your project file to true
+- Flow Launcher targets .NET 9 or later, so upgrade older plugins to keep them maintainable
+- Include every DLL the plugin uses in the final build. To do this, set `CopyLocalLockFileAssemblies` to `true` in your project file
 
 ### Steps
 
-1. To start off, you can fork/create a new repo, either way the project's commit history must be kept. If it's forked, you can just start updating it. If it's a new repo, do this by first cloning the repo, then add your new repo as a new repo remote, remove the original remote and then push to it
+1. Fork the repo or create a new one; either way, keep the project's commit history. A fork can be updated directly. For a new repo, clone the original repo, add your new repo as a remote, remove the original remote, and push
 2. Use `try-convert` tool from https://github.com/dotnet/try-convert
 3. `try-convert -w path-to-folder-or-solution-or-project`
-4. May need to fix on the project file, a good template to follow is the [Explorer plugin](https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/Plugins/Flow.Launcher.Plugin.Explorer/Flow.Launcher.Plugin.Explorer.csproj) project:
+4. Fix up the project file if needed. A good template to follow is the [Explorer plugin](https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/Plugins/Flow.Launcher.Plugin.Explorer/Flow.Launcher.Plugin.Explorer.csproj) project:
     - fix `<TargetFramework>` to `net9.0-windows10.0.19041.0`
     - set the output location as `Output\Release\<name of the project>`
     - add `<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>` and `<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>` to the csproj file
     - bump version to 2.0.0 and fix up any missing attributes if necessary
-5. Update code and fix plugin's setting layout if necessary
-6. Update readme to indicate where this port is from and the original author of the project
+5. Update the code, and fix the plugin's settings layout if necessary
+6. Update the readme to say where the port comes from and who the original author is
 
 ## Wox Python Plugins
 
@@ -28,5 +28,5 @@
 ### Steps
 
 1. Change the import from Wox to import from flowlauncher
-2. The class should inherit from FlowLauncher instead of Wox
+2. Make the class inherit from FlowLauncher instead of Wox
 3. Install the flowlauncher python package
