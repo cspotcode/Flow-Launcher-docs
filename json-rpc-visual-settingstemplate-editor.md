@@ -1,8 +1,8 @@
 ## SettingsTemplate.yaml editor
 
-Note that data in the editor below is not persisted. It will be lost once you close your browser. Remember to press "Generate SettingsTemplate.yaml" and save the result if you want to keep it.
+The editor below doesn't save your data: it's lost when you close the browser. To keep your work, press "Generate SettingsTemplate.yaml" and save the result.
 
-If you already have a SettingsTemplate.yaml file and would like to try editing it here, just copy its contents and paste it on this page.
+To edit an existing SettingsTemplate.yaml file here, paste its contents on this page.
 
 <settings-generator></settings-generator>
 
