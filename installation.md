@@ -1,24 +1,24 @@
 ### Installation
 
-Flow Launcher can be installed several ways, including Windows package managers Winget, Scoop, and Chocolatey. The most popular method is to download the installer file from the main Flow Launcher website. This downloads the latest release package from the Flow Launcher GitHub repository (repo).
+Flow Launcher can be installed several ways, including the Windows package managers Winget, Scoop, and Chocolatey. The most popular method is downloading the installer from the main Flow Launcher website, which fetches the latest release from the Flow Launcher GitHub repository (repo).
 
 #### Minimum Requirement
 
-Note that as of Flow version 2.0.0+, Windows 10 is the minimum requirement.
+Flow 2.0.0 and later require Windows 10 or newer.
 
 #### Security
 
-When installing Flow Launcher, you will get the Microsoft Defender SmartScreen installer window warning:
+When you install Flow Launcher, Microsoft Defender SmartScreen shows this warning:
 
 ![MS SmartScreen install warning](/assets/Flow_smartscreen.png)
 
-This appears as Flow Launcher has not been downloaded enough times, or users have not flagged this as "safe", for Microsoft to yet allow the installer to run without this warning. Over time we are hoping this becomes a trusted app with Microsoft; however this does not mean Flow Launcher is dangerous or malicious. As you should do with all software, you should be satisfied of the pedigree of the installation executable. For Flow Launcher you should ensure you download from flowlauncher.com, or the official repo. Flow Launcher is open source so anyone can download and review the source code. Any issues or concerns are welcome in the Issues part of the repo.
+It appears because Flow Launcher hasn't yet been downloaded enough times, or flagged as "safe" by enough users, for Microsoft to let the installer run without a warning. We hope Microsoft will trust the app over time. The warning does not mean Flow Launcher is dangerous or malicious. As with all software, make sure you trust where the installer came from: download Flow Launcher only from flowlauncher.com or the official repo. Flow Launcher is open source, so anyone can review its source code. Issues and concerns are welcome in the repo's Issues section.
 
-You may also get false positives from third-party antivirus and antimalware applications. As above, once you are sure you have downloaded the installer from an official source, and asked any questions you have with GitHub Issues, we ask that you submit a false-positive report to the AV vendor.
+Third-party antivirus and antimalware applications may also report false positives. Once you're sure the installer came from an official source, and you've raised any questions in GitHub Issues, please submit a false-positive report to the antivirus vendor.
 
 #### Plugins
 
-Flow Launcher installs with a set of "core" plugins that are maintained by the Flow Launcher team. These are:
+Flow Launcher installs with a set of "core" plugins maintained by the Flow Launcher team:
 
 - Browser Bookmarks
 - Calculator
@@ -33,4 +33,4 @@ Flow Launcher installs with a set of "core" plugins that are maintained by the F
 - Web Searches
 - Windows Settings
 
-There are also over 200 third-party plugins that extend Flow Launcher's functionality and these can be browsed and installed in the Plugin Store settings page.
+Over 200 third-party plugins extend Flow Launcher's functionality. Browse and install them on the Plugin Store settings page.
