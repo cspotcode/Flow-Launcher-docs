@@ -1,14 +1,14 @@
 ### Support
 
-Flow Launcher is an open source project that is updated and maintained by a team of volunteers. If you have any issues or questions, the Flow Launcher team and other users can help in the following ways:
+Flow Launcher is an open source project maintained by a team of volunteers. If you have an issue or question, the Flow Launcher team and other users can help:
 
-- For any errors or bug reports raise an issue in the GitHub Repository. Please follow the new issue template and try to describe in as much detail as you can what you were doing when the error occurred. If it is determined the error is with a third party plugin, you may be directed to open the issue in the plugin author's repository so they can investigate.
+- To report an error or bug, open an issue in the GitHub repository. Follow the new issue template and describe in as much detail as possible what you were doing when the error occurred. If the error turns out to be in a third-party plugin, you may be asked to open the issue in the plugin author's repository so they can investigate.
 
 **GitHub:**
 
         https://github.com/Flow-Launcher/Flow.Launcher/issues
 
-- For problems, suggestions, hints, tips, help with plugin dev, or just to connect with other Flow Launcher users world-wide, pop in and say hello on
+- For problems, suggestions, tips, help with plugin development, or to connect with other Flow Launcher users worldwide, join us on:
 
 **Discord:**
 

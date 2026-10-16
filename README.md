@@ -4,6 +4,6 @@ This documentation covers getting started with Flow, its settings, and customisa
 
 Start with the [**Quick Start**](/quickstart.md) guide for your first steps, then dive into more detail from there. For help with any issues, see the [**Support**](/support.md) page. Browse the many community-created [**Plugins**](https://www.flowlauncher.com/plugins/) to extend Flow to do just about anything.
 
-And if you find a use case not covered, and are feeling creative, learn about [**Plugin Development**](/plugin-dev.md) and create your own!
+If no plugin covers your use case, learn about [**Plugin Development**](/plugin-dev.md) and create your own.
 
 Flow Launcher is created and maintained as an open source project by a worldwide team of productivity-passionate volunteers. We hope you enjoy using it as much as we enjoy creating it.
